@@ -28,13 +28,19 @@ function newQuote() {
     // pick a random quote from apiQuotes array
     const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
     //cehck if author field is black and replace it with 'unknown'
-    console.log(quote);
     if (!quote.author) {
         authorText.textContent = 'Unknown';
     } else {
         authorText.textContent = quote.author;
     }
+    //check qoute length to determine styling
+    if (quote.quote.length > 120) {
+        quoteText.classList.add('long-quote');
+    } else {
+        quoteText.classList.remove('long-quote');
+    }
 
+    //authorText.textContent = quote.author;
     quoteText.textContent = quote.quote;
 }
 
@@ -60,6 +66,18 @@ async function getQuotes() {
         //Catch error here
     }
 }
+
+
+//share with friends in facebook
+function facebookQuote() {
+    //const facebookUrl = `https://www.facebook.com/dialog/share?text=${quoteText.textContent} - ${authorText.textContent}`;
+    const facebookUrl = `https://www.facebook.com/dialog/feed?app_id=145634995501895&display=popup&link=www.gmail.com`;
+    window.open(facebookUrl, '_blank');
+}
+
+//event listeners
+newQuoteBtn.addEventListener('click', newQuote);
+facebookBtn.addEventListener('click', facebookQuote);
 
 //On LOAD
 getQuotes();
