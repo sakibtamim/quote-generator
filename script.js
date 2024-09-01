@@ -71,7 +71,7 @@ async function getQuotes() {
 //share with friends in facebook
 function facebookQuote() {
     //const facebookUrl = `https://www.facebook.com/dialog/share?text=${quoteText.textContent} - ${authorText.textContent}`;
-    const facebookUrl = `https://www.facebook.com/dialog/feed?app_id=145634995501895&display=popup&link=www.gmail.com`;
+    const facebookUrl = `https://www.facebook.com/dialog/feed?app_id=145634995501895&display=popup&link=https://sakibtamim.github.io/quote-generator/`;
     window.open(facebookUrl, '_blank');
 }
 
