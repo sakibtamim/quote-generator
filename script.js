@@ -20,11 +20,26 @@ const quoteText = document.getElementById('quote');
 const authorText = document.getElementById('author');
 const facebookBtn = document.getElementById('facebook');
 const newQuoteBtn = document.getElementById('new-quote');
+const loader = document.getElementById('loader');
 
 let apiQuotes = [];
 
+//show loading
+function loading() {
+    loader.hidden = false;
+    quoteContainer.hidden = true;
+}
+
+//hide loading
+function complete() {
+    quoteContainer.hidden = false;
+    loader.hidden = true;
+}
+
+
 //show new quote
 function newQuote() {
+    loading();
     // pick a random quote from apiQuotes array
     const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
     //cehck if author field is black and replace it with 'unknown'
@@ -39,14 +54,16 @@ function newQuote() {
     } else {
         quoteText.classList.remove('long-quote');
     }
-
+    // set quote, hide loader
     //authorText.textContent = quote.author;
     quoteText.textContent = quote.quote;
+    complete();
 }
 
 
 // Get Quotes From API
 async function getQuotes() {
+    loading();
     //const apiUrl = 'https://api.api-ninjas.com/v1/quotes';
     const apiUrl = 'https://random-quotes-freeapi.vercel.app/api/quotes';
     //const apiUrl = 'https://type.fit/api/quotes';
@@ -71,7 +88,7 @@ async function getQuotes() {
 //share with friends in facebook
 function facebookQuote() {
     //const facebookUrl = `https://www.facebook.com/dialog/share?text=${quoteText.textContent} - ${authorText.textContent}`;
-    const facebookUrl = `https://www.facebook.com/dialog/feed?app_id=145634995501895&display=popup&link=https://sakibtamim.github.io/quote-generator/`;
+    const facebookUrl = `https://www.facebook.com/dialog/feed?app_id=145634995501895&display=popup&link=https://www.facebook.com/`;
     window.open(facebookUrl, '_blank');
 }
 
@@ -81,3 +98,4 @@ facebookBtn.addEventListener('click', facebookQuote);
 
 //On LOAD
 getQuotes();
+
