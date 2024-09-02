@@ -25,13 +25,13 @@ const loader = document.getElementById('loader');
 let apiQuotes = [];
 
 //show loading
-function loading() {
+function showLoading() {
     loader.hidden = false;
     quoteContainer.hidden = true;
 }
 
 //hide loading
-function complete() {
+function hideLoading() {
     quoteContainer.hidden = false;
     loader.hidden = true;
 }
@@ -39,7 +39,7 @@ function complete() {
 
 //show new quote
 function newQuote() {
-    loading();
+    showLoading();
     // pick a random quote from apiQuotes array
     const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
     //cehck if author field is black and replace it with 'unknown'
@@ -57,13 +57,13 @@ function newQuote() {
     // set quote, hide loader
     //authorText.textContent = quote.author;
     quoteText.textContent = quote.quote;
-    complete();
+    hideLoading();
 }
 
 
 // Get Quotes From API
 async function getQuotes() {
-    loading();
+    showLoading();
     //const apiUrl = 'https://api.api-ninjas.com/v1/quotes';
     const apiUrl = 'https://random-quotes-freeapi.vercel.app/api/quotes';
     //const apiUrl = 'https://type.fit/api/quotes';
